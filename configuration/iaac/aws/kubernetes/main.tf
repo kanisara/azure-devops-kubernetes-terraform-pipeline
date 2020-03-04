@@ -13,8 +13,8 @@ terraform {
   }
 }
 
-resource "aws_default_vpc" "default" {
 
+resource "aws_default_vpc" "default" {
 }
 
 data "aws_subnet_ids" "subnets" {
@@ -29,11 +29,11 @@ provider "kubernetes" {
   version                = "~> 1.9"
 }
 
-module "in28minutes-cluster" {
+module "my-cluster" {
   source          = "terraform-aws-modules/eks/aws"
-  cluster_name    = "in28minutes-cluster"
+  cluster_name    = "my-cluster"
   cluster_version = "1.14"
-  subnets         = ["subnet-3f7b2563", "subnet-4a7d6a45"] #CHANGE
+  subnets         = ["subnet-1592821a", "subnet-1a254824"] #CHANGE
   #subnets = data.aws_subnet_ids.subnets.ids
   vpc_id          = aws_default_vpc.default.id
 
@@ -50,11 +50,11 @@ module "in28minutes-cluster" {
 }
 
 data "aws_eks_cluster" "cluster" {
-  name = module.in28minutes-cluster.cluster_id
+  name = module.my-cluster.cluster_id
 }
 
 data "aws_eks_cluster_auth" "cluster" {
-  name = module.in28minutes-cluster.cluster_id
+  name = module.my-cluster.cluster_id
 }
 
 
