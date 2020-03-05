@@ -33,7 +33,7 @@ module "my-cluster" {
   source          = "terraform-aws-modules/eks/aws"
   cluster_name    = "my-cluster"
   cluster_version = "1.14"
-  subnets         = ["subnet-1592821a", "subnet-1a254824"] #CHANGE
+  subnets         = ["subnet-1679975b", "subnet-339dc354"] #CHANGE
   #subnets = data.aws_subnet_ids.subnets.ids
   vpc_id          = aws_default_vpc.default.id
 
@@ -42,9 +42,9 @@ module "my-cluster" {
   node_groups = [
     {
       instance_type = "t2.micro"
-      max_capacity  = 5
-      desired_capacity = 3
-      min_capacity  = 3
+      max_capacity  = 4
+      desired_capacity = 2
+      min_capacity  = 2
     }
   ]
 }
